@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IYf-a3-PZX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -20,10 +19,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="D9q-nK-iJW">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="FOl-xn-T1Y"/>
-                                    <constraint firstAttribute="height" constant="528" id="sYu-FM-jla"/>
-                                </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="toDoItems" id="zdC-Kl-dpk">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -33,17 +28,8 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="FOl-xn-T1Y"/>
-                                        <exclude reference="sYu-FM-jla"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="FOl-xn-T1Y"/>
-                                        <include reference="sYu-FM-jla"/>
-                                    </mask>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="72" width="400" height="528"/>
                                 </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="i06-Ne-nLP"/>
@@ -70,25 +56,26 @@
                                     <action selector="onTappedAddButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7k4-2I-rBU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufe-Vi-NgY">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="223" y="78" width="57" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="onEditButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="WZ1-xO-ojE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="D9q-nK-iJW" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="Qgp-gu-uvh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="D9q-nK-iJW" secondAttribute="trailing" constant="-16" id="V6e-Bw-7b7"/>
-                            <constraint firstItem="D9q-nK-iJW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="jTv-QO-oRW"/>
-                            <constraint firstItem="D9q-nK-iJW" firstAttribute="bottom" secondItem="kh9-bI-dsS" secondAttribute="bottomMargin" id="qdb-A0-ZYi"/>
-                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="D9q-nK-iJW"/>
                                 <exclude reference="btB-c4-GKl"/>
                                 <exclude reference="7ej-4o-lzt"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="Qgp-gu-uvh"/>
-                                <exclude reference="V6e-Bw-7b7"/>
-                                <exclude reference="jTv-QO-oRW"/>
-                                <exclude reference="qdb-A0-ZYi"/>
+                                <exclude reference="Ufe-Vi-NgY"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -96,12 +83,7 @@
                                 <include reference="D9q-nK-iJW"/>
                                 <include reference="btB-c4-GKl"/>
                                 <include reference="7ej-4o-lzt"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="Qgp-gu-uvh"/>
-                                <include reference="V6e-Bw-7b7"/>
-                                <include reference="jTv-QO-oRW"/>
-                                <include reference="qdb-A0-ZYi"/>
+                                <include reference="Ufe-Vi-NgY"/>
                             </mask>
                         </variation>
                     </view>
@@ -112,6 +94,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="addItemField" destination="btB-c4-GKl" id="SD1-h3-Ga6"/>
+                        <outlet property="editButton" destination="Ufe-Vi-NgY" id="kqX-V7-2kT"/>
                         <outlet property="errandsTableView" destination="D9q-nK-iJW" id="V8G-ZB-L1x"/>
                     </connections>
                 </viewController>

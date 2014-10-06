@@ -13,8 +13,8 @@
 @property NSMutableArray *errands;
 @property (weak, nonatomic) IBOutlet UITextField *addItemField;
 @property (weak, nonatomic) IBOutlet UITableView *errandsTableView;
-@property NSIndexPath *lastIndex;
 @property NSMutableArray *checkedIndexPath;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
 
 @end
 
@@ -66,8 +66,15 @@
 //If it does have an accessory, take it away.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
+    if ([self.editButton.titleLabel.text containsString:@"Done"])
+    {
+        [self.errands removeObjectAtIndex:indexPath.row];
+        [tableView reloadData];
+
+    }
+
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell.accessoryType == UITableViewCellAccessoryNone)
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -80,6 +87,14 @@
     }
 }
 
+- (IBAction)onEditButtonPressed:(id)sender
+{
+    [self.editButton setTitle:@"Done" forState:normal];
+    if ([self.editButton.titleLabel.text containsString:@"Done"])
+    {
+        [self.editButton setTitle:@"Edit" forState:normal];
+    }
+}
 
 
 
