@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
 @property NSMutableArray *errands;
 @property (weak, nonatomic) IBOutlet UITextField *addItemField;
@@ -62,6 +62,13 @@
     [self.errandsTableView reloadData];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.errands removeObjectAtIndex:indexPath.row];
+
+    [tableView reloadData];
+}
+
 //When you select a cell, check to see if that cell has any accessories, if not give it 1.
 //If it does have an accessory, take it away.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,6 +101,11 @@
     {
         [self.editButton setTitle:@"Edit" forState:normal];
     }
+}
+
+- (IBAction)onSwipeRight:(id)sender
+{
+
 }
 
 

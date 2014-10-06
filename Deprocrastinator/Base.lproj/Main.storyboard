@@ -70,6 +70,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="D9q-nK-iJW"/>
@@ -86,6 +87,9 @@
                                 <include reference="Ufe-Vi-NgY"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Mag-go-dBS" appends="YES" id="ezu-2g-blF"/>
+                        </connections>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="z1q-g1-pvc">
@@ -99,6 +103,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="Mag-go-dBS">
+                    <connections>
+                        <action selector="onSwipeRight:" destination="vXZ-lx-hvc" id="k6p-iU-ZX9"/>
+                        <outlet property="delegate" destination="vXZ-lx-hvc" id="piz-wQ-Gjf"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1056" y="136"/>
         </scene>
