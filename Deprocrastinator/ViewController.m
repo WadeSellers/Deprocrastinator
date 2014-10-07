@@ -34,7 +34,8 @@
     {
         [self.checkedIndexPath addObject:[NSNumber numberWithBool:NO]];
     }
-    
+
+
 }
 
 //This tells my TableView how many rows it needs to build
@@ -103,9 +104,36 @@
     }
 }
 
-- (IBAction)onSwipeRight:(id)sender
+- (IBAction)onSwipeRight:(UIGestureRecognizer *)swipeGesture
 {
+    CGPoint location = [swipeGesture locationInView:self.errandsTableView];
 
+    NSIndexPath *indexPath = [self.errandsTableView indexPathForRowAtPoint:location];
+
+    if (indexPath)
+    {
+        UITableViewCell *cell = [self.errandsTableView cellForRowAtIndexPath:indexPath];
+
+        if (cell.tag == 0) {
+            cell.backgroundColor = [UIColor redColor];
+            cell.tag++;
+        }
+        else if (cell.tag == 1)
+        {
+            cell.backgroundColor = [UIColor yellowColor];
+            cell.tag++;
+        }
+        else if (cell.tag == 2)
+        {
+            cell.backgroundColor = [UIColor greenColor];
+            cell.tag++;
+        }
+        else if (cell.tag == 3)
+        {
+            cell.tag = 0;
+            cell.backgroundColor = [UIColor whiteColor];
+        }
+    }
 }
 
 
