@@ -8,13 +8,14 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, UIAlertViewDelegate>
 
-@property NSMutableArray *errands;
 @property (weak, nonatomic) IBOutlet UITextField *addItemField;
 @property (weak, nonatomic) IBOutlet UITableView *errandsTableView;
-@property NSMutableArray *checkedIndexPath;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property NSMutableArray *checkedIndexPath;
+@property NSMutableArray *errands;
+@property NSIndexPath *alertIndexPath;
 
 @end
 
@@ -34,8 +35,6 @@
     {
         [self.checkedIndexPath addObject:[NSNumber numberWithBool:NO]];
     }
-
-
 }
 
 //This tells my TableView how many rows it needs to build
@@ -48,7 +47,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"toDoItems" forIndexPath:indexPath];
-
     cell.textLabel.text = [self.errands objectAtIndex:indexPath.row];
     return cell;
 }
@@ -63,25 +61,40 @@
     [self.errandsTableView reloadData];
 }
 
+//This sets up the tableview to ask datasource to make a change when told to.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.errands removeObjectAtIndex:indexPath.row];
+    self.alertIndexPath = indexPath;
 
-    [tableView reloadData];
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                        message:@"Are you sure?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"NO"
+                                              otherButtonTitles:@"YES", nil];
+        [alert show];
+        [tableView reloadData];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self.errands removeObjectAtIndex:self.alertIndexPath.row];
+        [self.errandsTableView reloadData];
+    }
 }
 
 //When you select a cell, check to see if that cell has any accessories, if not give it 1.
 //If it does have an accessory, take it away.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
     if ([self.editButton.titleLabel.text containsString:@"Done"])
     {
         [self.errands removeObjectAtIndex:indexPath.row];
         [tableView reloadData];
-
     }
-
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if (cell.accessoryType == UITableViewCellAccessoryNone)
     {
@@ -95,21 +108,29 @@
     }
 }
 
-- (IBAction)onEditButtonPressed:(id)sender
+- (IBAction)onEditButtonPressed:(UIButton *)sender
 {
-    [self.editButton setTitle:@"Done" forState:normal];
+    [self.editButton setTitle:@"Done" forState:UIControlStateNormal];
+    [self.errandsTableView setEditing: YES animated: YES];
+
     if ([self.editButton.titleLabel.text containsString:@"Done"])
     {
-        [self.editButton setTitle:@"Edit" forState:normal];
+        [self.editButton setTitle:@"Edit" forState:UIControlStateNormal];
+        [self.errandsTableView setEditing: NO animated: YES];
     }
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+}
+
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
 }
 
 - (IBAction)onSwipeRight:(UIGestureRecognizer *)swipeGesture
 {
     CGPoint location = [swipeGesture locationInView:self.errandsTableView];
-
     NSIndexPath *indexPath = [self.errandsTableView indexPathForRowAtPoint:location];
-
     if (indexPath)
     {
         UITableViewCell *cell = [self.errandsTableView cellForRowAtIndexPath:indexPath];
@@ -135,10 +156,5 @@
         }
     }
 }
-
-
-
-
-
 
 @end

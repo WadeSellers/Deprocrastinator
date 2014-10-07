@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IYf-a3-PZX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -20,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="toDoItems" id="zdC-Kl-dpk">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="toDoItems" id="zdC-Kl-dpk">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zdC-Kl-dpk" id="5bl-Vb-GTg">
@@ -28,22 +29,11 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="72" width="400" height="528"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="i06-Ne-nLP"/>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="pFo-ac-fqZ"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="btB-c4-GKl">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="16" y="78" width="160" height="30"/>
-                                </variation>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ej-4o-lzt">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Add">
@@ -68,23 +58,49 @@
                                     <action selector="onEditButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="WZ1-xO-ojE"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="btB-c4-GKl">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="78" width="160" height="30"/>
+                                </variation>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="D9q-nK-iJW" secondAttribute="trailing" constant="-16" id="abP-mp-ZXt"/>
+                            <constraint firstItem="D9q-nK-iJW" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="bsR-7e-0qv"/>
+                            <constraint firstItem="D9q-nK-iJW" firstAttribute="bottom" secondItem="kh9-bI-dsS" secondAttribute="bottomMargin" id="hYv-AD-4PL"/>
+                            <constraint firstItem="D9q-nK-iJW" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="qQN-4E-Wht"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="D9q-nK-iJW"/>
-                                <exclude reference="btB-c4-GKl"/>
                                 <exclude reference="7ej-4o-lzt"/>
                                 <exclude reference="Ufe-Vi-NgY"/>
+                                <exclude reference="btB-c4-GKl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="abP-mp-ZXt"/>
+                                <exclude reference="bsR-7e-0qv"/>
+                                <exclude reference="hYv-AD-4PL"/>
+                                <exclude reference="qQN-4E-Wht"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="D9q-nK-iJW"/>
-                                <include reference="btB-c4-GKl"/>
                                 <include reference="7ej-4o-lzt"/>
                                 <include reference="Ufe-Vi-NgY"/>
+                                <include reference="btB-c4-GKl"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="abP-mp-ZXt"/>
+                                <include reference="bsR-7e-0qv"/>
+                                <include reference="hYv-AD-4PL"/>
+                                <include reference="qQN-4E-Wht"/>
                             </mask>
                         </variation>
                         <connections>
