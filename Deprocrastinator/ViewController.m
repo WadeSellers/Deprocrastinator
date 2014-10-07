@@ -24,10 +24,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.errands = [NSMutableArray arrayWithObjects:@"Take out trash",
-                    @"Do dishes",
-                    @"Clean room",
-                    @"Vacuum", nil];
+    self.errands = [NSMutableArray arrayWithObjects:@"Milk the Cows",
+                    @"Gather Chicken Eggs",
+                    @"Feed the Goats",
+                    @"Build a Barn",
+                    @"Fix the Tractor",
+                    @"Darn My Socks",
+                    @"Beat Dust Out Of Rug",
+                    @"ReShoe the Horses",
+                    @"Sharpen Pitchfork",
+                    @"Repair the Ole Pickup",
+                    @"Do Some Garden'n",
+                    @"Knockin Up The Ole Lady",
+                    @"Work On Line Dance",
+                    @"Yell At Children",
+                    @"ReHang No Tresspassing Signs", nil];
 
     //This is assigning an array of NO's for as many objects are in our errands array
     self.checkedIndexPath = [NSMutableArray arrayWithCapacity:self.errands.count];
